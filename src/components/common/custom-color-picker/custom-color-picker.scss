@@ -1,0 +1,42 @@
+@import "src/scss/variables";
+
+.custom-color-picker {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 5px;
+  }
+
+  &::-moz-focus-inner {
+    padding: 0;
+    border-radius: 5px;
+  }
+
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+  }
+
+  &::-moz-color-swatch {
+    border: none;
+    border-radius: 5px;
+  }
+
+  &--show-border {
+    &::-webkit-color-swatch {
+      border: 1px solid $dark-tertiary;
+    }
+
+    &::-moz-color-swatch {
+      border: 1px solid $dark-tertiary;
+    }
+  }
+}

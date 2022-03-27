@@ -1,0 +1,29 @@
+$default-font: "GothamPro", sans-serif;
+
+$black: #000000;
+$white: #ffffff;
+$red: red;
+$gray: #e5e5e5;
+$blue-light: #007aff;
+$dark-tertiary: #1f2223;
+$dark-secondary: rgba(235, 235, 245, 0.6);
+
+$background-main: $gray;
+$background-main-frame: $dark-tertiary;
+$background-content-frame: $black;
+$background-input: $dark-tertiary;
+
+$label-text-size: 13px;
+$label-line-height: 22px;
+$base-text-size: 17px;
+$base-line-height: 22px;
+
+$text-color: $white;
+$btn-text-color: $white;
+$label-text-color: $dark-secondary;
+$placeholder-text-color: $dark-secondary;
+
+$btn-color: $blue-light;
+$btn-disabled-color: $dark-tertiary;
+
+$input-error-color: $red;

@@ -1,0 +1,60 @@
+@import "src/scss/variables";
+
+.user-form {
+  width: 100%;
+
+  &--no-submited {
+    input {
+      &:invalid {
+        border-color: transparent;
+      }
+    }
+  }
+
+  &__btn-wrapper {
+    margin-top: 48px;
+    margin-bottom: 23px;
+  }
+
+  &__textarea {
+    display: flex;
+    flex-flow: column;
+
+    label {
+      margin-bottom: 5px;
+      padding-left: 15px;
+      font-family: $default-font;
+      font-size: $label-text-size;
+      line-height: $label-line-height;
+      font-weight: 700;
+      color: $label-text-color;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 7px 12px;
+      font-family: $default-font;
+      font-size: $base-text-size;
+      line-height: $base-line-height;
+      font-weight: 400;
+      color: $text-color;
+      border: none;
+      border-radius: 10px;
+      background-color: $background-input;
+      resize: none;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: $placeholder-text-color;
+      }
+
+      &--error {
+        border-color: $input-error-color;
+      }
+    }
+  }
+}

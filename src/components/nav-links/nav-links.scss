@@ -1,0 +1,45 @@
+@import "src/scss/variables";
+
+.nav-link {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  margin: 0 0 15px;
+  padding: 0 18px 9px;
+  list-style: none;
+
+  li {
+    margin-right: 38px;
+  }
+
+  a {
+    margin: 0;
+    padding: 0;
+    font-family: $default-font;
+    font-size: $base-text-size;
+    line-height: $base-line-height;
+    font-weight: 400;
+    color: $text-color;
+    text-decoration: none;
+
+    &.active {
+      text-decoration: underline;
+      cursor: default;
+
+      &:hover,
+      &:focus,
+      &:active {
+        opacity: 1;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.6;
+    }
+  }
+}
