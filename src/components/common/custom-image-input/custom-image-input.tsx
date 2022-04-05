@@ -4,20 +4,26 @@ import "./custom-image-input.scss";
 const ALLOWED_TYPE_REGEX = /.+(.jpg|.jpeg|.gif|.png)$/;
 
 type CustomImageInputProps = {
-  getImage: (img: File) => void;
+  onSelectImage: (img: File) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-function CustomImageInput({ getImage, ...otherProps }: CustomImageInputProps): JSX.Element {
-  const [hover, setHover] = useState<boolean>(false);
-  const [path, setPath] = useState<string | undefined>(undefined);
-  const [allowed, setAllowed] = useState<boolean>(true);
+function CustomImageInput({ onSelectImage, ...otherProps }: CustomImageInputProps): JSX.Element {
+  const [hover, setHover] = useState(false);
+  const [path, setPath] = useState<string>();
+  const [allowed, setAllowed] = useState(true);
 
   const onImageChange = (evt: ChangeEvent<HTMLInputElement>) => {
     if (evt.target.files && evt.target.files[0]) {
       const image = evt.target.files[0];
-      setPath(URL.createObjectURL(image));
-      getImage(image);
-      setAllowed(true);
+      const isAllowed = ALLOWED_TYPE_REGEX.test(image.name);
+
+      if (isAllowed) {
+        setPath(URL.createObjectURL(image));
+        onSelectImage(image);
+        setAllowed(true);
+      }
+
+      setAllowed(isAllowed);
     }
   };
 
@@ -25,20 +31,26 @@ function CustomImageInput({ getImage, ...otherProps }: CustomImageInputProps): J
     evt.preventDefault();
     const image = evt.dataTransfer.files[0];
     const isAllowed = ALLOWED_TYPE_REGEX.test(image.name);
+
     if (isAllowed) {
       setPath(URL.createObjectURL(image));
-      getImage(image);
+      onSelectImage(image);
     }
+
     setAllowed(isAllowed);
     setHover(false);
   };
 
-  const onLabelDragStart = () => {
+  const onLabelDragEnter = () => {
     setHover(true);
   };
 
   const onLabelDragLeave = () => {
     setHover(false);
+  };
+
+  const onLabelDragEnd = (evt: DragEvent<HTMLLabelElement>) => {
+    evt.preventDefault();
   };
 
   return (
@@ -49,8 +61,9 @@ function CustomImageInput({ getImage, ...otherProps }: CustomImageInputProps): J
           hover ? "hover" : ""
         }`}
         htmlFor="image"
-        onDragEnter={onLabelDragStart}
+        onDragEnter={onLabelDragEnter}
         onDragLeave={onLabelDragLeave}
+        onDragOver={onLabelDragEnd}
         onDrop={onLabelDrop}
       >
         <img src={path} />

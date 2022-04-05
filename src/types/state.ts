@@ -2,7 +2,7 @@ import { PaletteColors } from "./palette";
 
 export type AppData = {
   response: string;
-  isRequest: boolean;
+  isLoading: boolean;
 };
 
 export type PaletteProcess = {

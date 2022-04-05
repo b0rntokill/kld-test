@@ -4,7 +4,7 @@ import { sendUserData } from "./async-actions";
 
 const initialState: AppData = {
   response: "",
-  isRequest: false,
+  isLoading: false,
 };
 
 const dataSlice = createSlice({
@@ -14,14 +14,14 @@ const dataSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(sendUserData.pending, (state) => {
-        state.isRequest = true;
+        state.isLoading = true;
       })
       .addCase(sendUserData.fulfilled, (state, action) => {
         state.response = action.payload;
-        state.isRequest = false;
+        state.isLoading = false;
       })
       .addCase(sendUserData.rejected, (state) => {
-        state.isRequest = false;
+        state.isLoading = false;
       });
   },
 });

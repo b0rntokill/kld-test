@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, InputHTMLAttributes } from "react";
 import "./custom-color-picker.scss";
 
-type CustomColorPickerProps = {
-  color: string;
-} & InputHTMLAttributes<HTMLInputElement>;
+type CustomColorPickerProps = InputHTMLAttributes<HTMLInputElement>;
 
-function CustomColorPicker({ color, ...otherProps }: CustomColorPickerProps): JSX.Element {
+function CustomColorPicker({ ...props }: CustomColorPickerProps): JSX.Element {
+  const { value } = props;
   const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -23,9 +22,9 @@ function CustomColorPicker({ color, ...otherProps }: CustomColorPickerProps): JS
       type="color"
       ref={input}
       className={`custom-color-picker  ${
-        color === "#000000" ? "custom-color-picker--show-border" : ""
+        value === "#000000" ? "custom-color-picker--show-border" : ""
       }`}
-      {...otherProps}
+      {...props}
     />
   );
 }

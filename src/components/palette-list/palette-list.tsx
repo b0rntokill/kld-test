@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
-import { PaletteColors } from "../../../types/palette";
-import CustomColorPicker from "../../common/custom-color-picker/custom-color-picker";
+import { PaletteColors } from "../../types/palette";
+import { CustomColorPicker } from "../common/custom-color-picker";
+import PaletteListEmpty from "./palette-list-empty";
 import "./palette-list.scss";
 
 type PaletteListProps = {
@@ -31,10 +32,7 @@ function PaletteList({
           ))}
         </ul>
       ) : (
-        <p>
-          <span>В палитре нет добавленных цветов.</span>
-          <span>Нажмите на кнопку для их добавления.</span>
-        </p>
+        <PaletteListEmpty />
       )}
     </div>
   );

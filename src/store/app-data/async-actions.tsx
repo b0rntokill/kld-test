@@ -21,6 +21,7 @@ export const sendUserData = createAsyncThunk("data/sendUserData", async (data: U
   formData.append("contact[]", name);
   formData.append("contact[]", surname);
   formData.append("contact[]", patronymic);
+
   try {
     const { data } = await api({
       method: "post",

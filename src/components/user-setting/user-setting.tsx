@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavLinks from "../nav-links/nav-links";
+import { NavLinks } from "../nav-links";
 import "./user-setting.scss";
 
 function UserSetting(): JSX.Element {

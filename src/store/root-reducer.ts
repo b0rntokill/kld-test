@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { appData } from "./app-data/app-data";
-import { paletteProcess } from "./palette-process/palette-process";
+import { paletteProcess } from "./palette-process";
 
 export enum NameSpace {
   data = "DATA",

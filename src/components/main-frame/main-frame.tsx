@@ -1,6 +1,6 @@
 import React from "react";
-import ContentFrame from "../content-frame/content-frame";
-import UserSetting from "../user-setting/user-setting";
+import { ContentFrame } from "../content-frame";
+import { UserSetting } from "../user-setting";
 import "./main-frame.scss";
 
 function MainFrame(): JSX.Element {

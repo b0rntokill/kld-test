@@ -1,29 +1,26 @@
 import React, { FormEvent, ChangeEvent, useRef, useState } from "react";
-import { UserData } from "../../../types/user-data";
-import CustomButton from "../../common/custom-button/custom-button";
-import CustomImageInput from "../../common/custom-image-input/custom-image-input";
-import CustomInput from "../../common/custom-input/custom-input";
+import { UserData } from "../../types/user-data";
+import { CustomButton } from "../common/custom-button";
+import { CustomImageInput } from "../common/custom-image-input";
+import { CustomInput } from "../common/custom-input";
 import "./user-form.scss";
 
 type UserFormProps = {
-  isRequest: boolean;
+  isLoading: boolean;
   responce: string;
   onSubmit: (data: UserData) => void;
 };
 
-function UserForm({ isRequest, responce, onSubmit }: UserFormProps): JSX.Element {
+function UserForm({ isLoading, responce, onSubmit }: UserFormProps): JSX.Element {
   const [formFields, setFormFields] = useState({
     name: "",
     surname: "",
     patronymic: "",
   });
-  const [image, setImage] = useState<File | undefined>(undefined);
-  const [isSubmited, setIsSubmited] = useState<boolean>(false);
-  const form = useRef<HTMLFormElement>(null);
 
-  const getImage = (img: File) => {
-    setImage(img);
-  };
+  const [image, setImage] = useState<File>();
+  const [isSubmited, setIsSubmited] = useState(false);
+  const form = useRef<HTMLFormElement>(null);
 
   const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const name = evt.target.name;
@@ -33,11 +30,14 @@ function UserForm({ isRequest, responce, onSubmit }: UserFormProps): JSX.Element
 
   const onFormSubmit = (evt: FormEvent) => {
     let isValid;
+
     if (form.current) {
       isValid = form.current.reportValidity();
     }
+
     setIsSubmited(true);
     evt.preventDefault();
+
     if (isValid && image) {
       const userData = {
         action: "send_data",
@@ -45,6 +45,7 @@ function UserForm({ isRequest, responce, onSubmit }: UserFormProps): JSX.Element
         contact: [formFields.name, formFields.surname, formFields.patronymic],
         image,
       };
+
       onSubmit(userData);
     }
   };
@@ -83,9 +84,13 @@ function UserForm({ isRequest, responce, onSubmit }: UserFormProps): JSX.Element
         onChange={onInputChange}
         required
       />
-      <CustomImageInput accept=".jpg, .jpeg, .gif, .png" required getImage={getImage} />
+      <CustomImageInput
+        accept=".jpg, .jpeg, .gif, .png"
+        required={!image}
+        onSelectImage={setImage}
+      />
       <div className="user-form__btn-wrapper">
-        <CustomButton text="Сохранить" type="submit" disabled={isRequest} />
+        <CustomButton text="Сохранить" type="submit" disabled={isLoading} />
       </div>
       <div className="user-form__textarea">
         <label>Response</label>
